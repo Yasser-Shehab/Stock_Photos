@@ -16,7 +16,8 @@ function App() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      setPhotos(data);
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -27,7 +28,23 @@ function App() {
     fetchImages();
   }, []);
 
-  return <h2>stock photos starter</h2>;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('submtted');
+  };
+
+  return (
+    <main>
+      <section className='search'>
+        <form className='search-form'>
+          <input type='text' placeholder='search' className='form-input' />
+          <button type='submit' className='submit-btn' onClick={handleSubmit}>
+            <FaSearch />
+          </button>
+        </form>
+      </section>
+    </main>
+  );
 }
 
 export default App;
